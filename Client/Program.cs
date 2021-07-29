@@ -48,7 +48,7 @@ namespace Client
 
 
             LogMessage("-- > Start calling ITestService.");
-            TestServiceResponse response = await testService.SaveDiscoveryResultAsync(request).ConfigureAwait(false);
+            TestServiceResponse response = await testService.SaveResultsAsync(request).ConfigureAwait(false);
             LogMessage($"-- > Finished calling ITestService. Success: {response.Success}");
 
             sw.Stop();

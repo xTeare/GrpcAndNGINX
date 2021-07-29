@@ -8,14 +8,14 @@ namespace Shared.Implementation
 {
     public class TestService : ITestService
     {
-        public async ValueTask<TestServiceResponse> SaveDiscoveryResultAsync(TestServiceRequest request)
+        public async ValueTask<TestServiceResponse> SaveResultsAsync(TestServiceRequest request)
         {
             TestServiceResponse response = new TestServiceResponse();
 
             try
             {
-                List<string> discoveryResults = request.LongList;
-                int resultCount = discoveryResults?.Count ?? 0;
+                List<string> results = request.LongList;
+                int resultCount = results?.Count ?? 0;
 
                 if (resultCount > 0)
                 {

@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Shared.Model;
+﻿using System.ServiceModel;
 using System.Threading.Tasks;
-using System.ServiceModel;
+using Shared.Model;
 
 namespace Shared.Contract
 {
     [ServiceContract]
     public interface ITestService
     {
-        ValueTask<TestServiceResponse> SaveDiscoveryResultAsync(TestServiceRequest request);
+        [OperationContract]
+        ValueTask<TestServiceResponse> SaveResultsAsync(TestServiceRequest request);
     }
 }
