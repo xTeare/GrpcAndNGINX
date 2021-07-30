@@ -5,7 +5,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Proto\greet.proto" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Google.Protobuf" Version="3.17.3" />
+    <PackageReference Include="Grpc.Net.Common" Version="2.38.0" />
+    <PackageReference Include="Grpc.Tools" Version="2.38.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="System.ServiceModel.Primitives" Version="4.5.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Protobuf Include="Proto\greet.proto">
+      <GrpcServices>Server</GrpcServices>
+    </Protobuf>
   </ItemGroup>
 
 </Project>
