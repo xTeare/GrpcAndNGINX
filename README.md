@@ -16,9 +16,9 @@ even if set to a large timeout
 2021/07/29 12:29:26 [error] 20604#30660: *36 upstream timed out (10060: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond) while sending request to upstream, client: 127.0.0.1, server: , request: "POST /Shared.Contract.TestService/SaveDiscoveryResult HTTP/2.0", upstream: "grpcs://127.0.0.1:5001", host: "localhost:5002"
 ```
 
-nginx is listening on port 50052
+nginx is listening on port 50051
 
-Server is hosting on port 50051
+Server is hosting on port 50052
 
 # Used Packages
 
