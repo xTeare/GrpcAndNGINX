@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+/Java/GrpcServer2/target/
+/Java/GrpcClient/target/
