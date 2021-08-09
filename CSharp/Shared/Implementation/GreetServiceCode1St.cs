@@ -6,15 +6,15 @@ using Shared.Model;
 
 namespace Shared.Implementation
 {
-    public class TestService : ITestService
+    public class GreetServiceCode1St : IGreetServiceCode1st
     {
-        public async ValueTask<TestServiceResponse> SaveResultsAsync(TestServiceRequest request)
+        public async ValueTask<Model.HelloReplyCode1st> SaveResultsAsync(Model.HelloRequestCode1st requestCode1St)
         {
-            TestServiceResponse response = new TestServiceResponse();
+            Model.HelloReplyCode1st response = new Model.HelloReplyCode1st();
 
             try
             {
-                List<string> results = request.LongList;
+                List<string> results = requestCode1St.Names;
                 int resultCount = results?.Count ?? 0;
 
                 if (resultCount > 0)

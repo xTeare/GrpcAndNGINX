@@ -13,7 +13,7 @@ namespace Server
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<ITestService, TestService>();
+            services.AddTransient<IGreetServiceCode1st, GreetServiceCode1St>();
             services.AddGrpc();
             services.AddCodeFirstGrpc();
             services.AddCodeFirstGrpcReflection();
@@ -31,7 +31,7 @@ namespace Server
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGrpcService<ITestService>();
+                endpoints.MapGrpcService<IGreetServiceCode1st>();
 
                 endpoints.MapCodeFirstGrpcReflectionService();
 

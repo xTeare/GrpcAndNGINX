@@ -5,9 +5,9 @@ using Shared.Model;
 namespace Shared.Contract
 {
     [ServiceContract]
-    public interface ITestService
+    public interface IGreetServiceCode1st
     {
         [OperationContract]
-        ValueTask<TestServiceResponse> SaveResultsAsync(TestServiceRequest request);
+        ValueTask<Model.HelloReplyCode1st> SaveResultsAsync(Model.HelloRequestCode1st requestCode);
     }
 }

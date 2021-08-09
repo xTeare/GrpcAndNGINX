@@ -1,19 +1,20 @@
 ﻿using System;
+using ProtoClient.Properties;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Http;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
-using Client.Properties;
 using Grpc.Net.Client;
-using ProtoBuf.Grpc.Client;
-using Shared.Contract;
-using Shared.Model;
+using Shared;
+using Shared.Services;
 
-namespace Client
+
+namespace ProtoClient
 {
     class Program
     {
+
         static async Task Main(string[] args)
         {
             await WaitForStartup().ConfigureAwait(false);
@@ -21,7 +22,7 @@ namespace Client
             await CallServer(1000).ConfigureAwait(false); // 1000 dont work for me - will timeout after 90 seconds (nginx.conf -> grpc_send_timeout 90s;)
             Console.Read();
         }
-        
+
         private static async Task CallServer(int entryCount)
         {
             LogMessage("> Start calling server");
@@ -33,23 +34,28 @@ namespace Client
             handler.ClientCertificates.Add(new X509Certificate2(Resources.cert_self, "Password123!"));
             LogMessage("-- > Created HttpClientHandler with certificate");
 
-            GrpcChannel channel = GrpcChannel.ForAddress("https://localhost:5002", new GrpcChannelOptions() { HttpHandler = handler }); //, new GrpcChannelOptions(){HttpHandler = handler}
-            ITestService testService = channel.CreateGrpcService<ITestService>();
-            LogMessage("-- > Created GrpcChannel and ITestService");
+            // port 5001 - the server it self
+            // port 5002 - nginx configured to call the server on 5001
+            GrpcChannel channel = GrpcChannel.ForAddress("https://localhost:5002", new GrpcChannelOptions() { HttpHandler = handler });
+            var client = new Greeter.GreeterClient(channel);
+            LogMessage("-- > Created GrpcChannel and GreetService");
 
             int entries = entryCount;
             List<string> list = new List<string>(entries);
 
-            for(int i = 0; i < entries; i++)
+            for (int i = 0; i < entries; i++)
                 list.Add($"This is a long string for testing purposes. It should reach quite some size. I am Entry No.: {i}");
 
-            TestServiceRequest request = new TestServiceRequest() { LongList = list };
             LogMessage($"-- > Created test data ({entries} entries)");
+            LogMessage("-- > Start calling GreetService.");
 
+            var req = new HelloRequest()
+            {
+                Results = {list}
+            };
 
-            LogMessage("-- > Start calling ITestService.");
-            TestServiceResponse response = await testService.SaveResultsAsync(request).ConfigureAwait(false);
-            LogMessage($"-- > Finished calling ITestService. Success: {response.Success}");
+            var reply = await client.SayHelloAsync(req);
+            LogMessage($"-- > Finished calling GreetService. Success: {reply.Message}");
 
             sw.Stop();
             LogMessage($"> End calling server. Duration: {sw.Elapsed}");

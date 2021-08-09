@@ -14,7 +14,7 @@ namespace Shared.Services
             Console.WriteLine(results.Count);
             return Task.FromResult(new HelloReply
             {
-                Message = "Successful ? "
+                Message = "Hello, here is your CSHARP Server"
             });
         }
     }

@@ -4,8 +4,9 @@ using System.Runtime.Serialization;
 namespace Shared.Model
 {
     [DataContract]
-    public class TestServiceRequest
+    public class HelloRequestCode1st
     {
-        [DataMember(Order = 1)] public List<string> LongList { get; set; }
+        [DataMember(Order = 1)]
+        public List<string> Names { get; set; }
     }
 }
