@@ -1,3 +1,8 @@
+# UPDATE
+This issue has been fixed: https://trac.nginx.org/nginx/ticket/2229
+It was indeed a bug within nginx.
+
+
 # C# GrpcAndNGINX
 
 Grpc Requests time out if the request is too big. Neither changes in the server's config nor in the nginx config seem to fix this issue.
